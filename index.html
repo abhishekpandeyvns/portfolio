@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhishek Pandey | Java Full Stack Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1120;
+        --panel: #111827;
+        --panel-light: #1f2937;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --primary: #38bdf8;
+        --accent: #22c55e;
+        --border: rgba(148, 163, 184, 0.25);
+        --shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: radial-gradient(circle at top, #0f172a, #020617);
+        color: var(--text);
+      }
+
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .container {
+        width: min(1100px, 92%);
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(2, 6, 23, 0.75);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+      }
+
+      .brand {
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.5px;
+        color: var(--primary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        transition: 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .hero {
+        padding: 100px 0 60px;
+        display: grid;
+        gap: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+      }
+
+      .hero-card {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 4vw, 44px);
+        margin-bottom: 16px;
+      }
+
+      .hero h1 span {
+        color: var(--primary);
+      }
+
+      .hero p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 24px;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .pill {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s ease;
+        border: 1px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn.primary {
+        background: var(--primary);
+        color: #020617;
+        box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
+      }
+
+      .btn.secondary {
+        background: transparent;
+        border-color: var(--border);
+        color: var(--text);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-110%);
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: transform 0.6s ease;
+      }
+
+      .btn:hover::after {
+        transform: translateX(110%);
+      }
+
+      .btn.animated {
+        animation: pulse 2.8s ease-in-out infinite;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .section-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+      }
+
+      .section-subtitle {
+        color: var(--muted);
+        margin-bottom: 32px;
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px;
+        line-height: 1.7;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
+      }
+
+      .card strong {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .list {
+        list-style: none;
+        display: grid;
+        gap: 14px;
+      }
+
+      .list li {
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: var(--panel-light);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-tags span {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.15);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        font-size: 13px;
+      }
+
+      footer {
+        padding: 30px 0 40px;
+        text-align: center;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+      }
+
+      header,
+      main,
+      footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      .profile-card {
+        display: grid;
+        gap: 16px;
+      }
+
+      .avatar {
+        width: 86px;
+        height: 86px;
+        border-radius: 24px;
+        display: grid;
+        place-items: center;
+        font-size: 30px;
+        font-weight: 700;
+        color: #020617;
+        background: linear-gradient(135deg, #38bdf8, #22c55e);
+        box-shadow: 0 16px 30px rgba(34, 197, 94, 0.25);
+      }
+
+      .profile-name {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .profile-role {
+        color: var(--muted);
+      }
+
+      .profile-info {
+        display: grid;
+        gap: 10px;
+      }
+
+      .profile-info span {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .profile-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .contact-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .contact-item {
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: var(--panel-light);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
+        }
+        50% {
+          box-shadow: 0 20px 36px rgba(56, 189, 248, 0.45);
+        }
+      }
+
+      @keyframes fadeUp {
+        0% {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+    <header>
+      <div class="container nav">
+        <div class="brand">Abhishek</div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero" id="about">
+        <div>
+          <div class="hero-meta">
+            <span class="pill">Java Full Stack Developer</span>
+            <span class="pill">3.2 Years Experience</span>
+            <span class="pill">Spring Boot · AWS · React</span>
+          </div>
+          <h1>Abhishek <span>Pandey</span></h1>
+          <p>
+            Java Full Stack Developer with 3.2 years of experience designing and developing
+            scalable web applications using Java, Spring Boot, React, TypeScript, MySQL, and AWS.
+            Experienced in building RESTful APIs, integrating cloud services, and implementing
+            responsive front-end interfaces. Strong background in backend development, database
+            design, CI/CD pipelines, and Agile collaboration. Adept at debugging, performance
+            tuning, and delivering production-ready solutions using Git, Docker, and GitHub
+            Actions.
+          </p>
+          <div class="cta">
+            <a class="btn primary animated" href="https://www.linkedin.com/in/abhishek-1104-pandey" target="_blank" rel="noopener"
+              >View LinkedIn</a
+            >
+            <a class="btn secondary" href="https://github.com/abhishekpandeyvns" target="_blank" rel="noopener"
+              >View GitHub</a
+            >
+            <a class="btn secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="profile-card">
+            <div class="avatar">AP</div>
+            <div>
+              <div class="profile-name">Abhishek Pandey</div>
+              <div class="profile-role">Java Full Stack Developer</div>
+            </div>
+            <div class="profile-info">
+              <span>Ghaziabad, Uttar Pradesh</span>
+              <span>abhipandey1150@gmail.com</span>
+              <span>+91 9580145142</span>
+            </div>
+            <div class="profile-links">
+              <a class="btn primary" href="https://www.linkedin.com/in/abhishek-1104-pandey" target="_blank" rel="noopener"
+                >LinkedIn</a
+              >
+              <a class="btn secondary" href="https://github.com/abhishekpandeyvns" target="_blank" rel="noopener"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2 class="section-title">Work Experience</h2>
+        <p class="section-subtitle">
+          Java Backend Developer — Virtusa Systems Software, US Virginia (07/2022 to Present)
+        </p>
+        <div class="grid two">
+          <div class="card">
+            <strong>E-learning Platform</strong>
+            <ul class="list">
+              <li>Developed a scalable e-learning platform supporting role-based scheduling for administrators, instructors, and students.</li>
+              <li>Enabled schedule creation, editing, and viewing tailored to user permissions, improving usability and content access.</li>
+              <li>Integrated calendar synchronization with automated reminders via email and push notifications.</li>
+              <li>Supported multi-device compatibility with responsive views embedded into external subscriber portals.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Backend Architecture & DevOps</strong>
+            <ul class="list">
+              <li>Built AWS Lambda functions to dynamically refresh database views and improve data accuracy in real time.</li>
+              <li>Designed a multi-tenant system allowing schools to register independently and manage users and content.</li>
+              <li>Implemented secure and customized payment gateways for each institution.</li>
+              <li>Implemented CI/CD pipelines using GitHub Actions to automate builds and streamline deployments.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid two">
+          <div class="card">
+            <strong>Spot Billing Application</strong>
+            <ul class="list">
+              <li>Engineered a real-time billing solution enabling electric meter reading and instant bill generation at customer locations.</li>
+              <li>Automated data capture and billing uploads for accurate on-site invoicing with minimal latency.</li>
+              <li>Designed role-based access controls for secure and flexible usage.</li>
+              <li>Resolved critical production issues and improved system stability by modernizing legacy code.</li>
+              <li>Delivered responsive web interfaces for field operators to ensure smooth data entry and usability.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Tech Stack</strong>
+            <ul class="list">
+              <li>Java, Spring Boot, Microservices, REST APIs, Spring Data JPA.</li>
+              <li>MySQL, MariaDB, Docker, AWS (Lambda, EC2, S3).</li>
+              <li>Git, GitHub Actions, CI/CD automation.</li>
+              <li>React, TypeScript, responsive UI delivery.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="card">
+          <div class="skill-tags">
+            <span>Core Java</span>
+            <span>Spring Boot</span>
+            <span>AWS</span>
+            <span>CI/CD</span>
+            <span>GitHub Actions</span>
+            <span>RESTful Services</span>
+            <span>Git Version Control</span>
+            <span>MySQL/MariaDB</span>
+            <span>Spring Security</span>
+            <span>Multi-Threading</span>
+            <span>Data Structures and Algorithms</span>
+            <span>Spring Data JPA</span>
+            <span>JUnit Testing</span>
+            <span>Spring Framework</span>
+            <span>Object-Oriented Programming</span>
+            <span>Backend Development</span>
+            <span>Skilled in Adaptability</span>
+            <span>Teamwork</span>
+            <span>Creativity</span>
+            <span>DevOps</span>
+            <span>Docker</span>
+            <span>Software Updates</span>
+            <span>Application Design</span>
+            <span>Design Principles</span>
+            <span>Code Reviews</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="grid two">
+          <div class="card">
+            <strong>MCA</strong>
+            J.S University, Shikohabad<br />
+            June 2019 - May 2022
+          </div>
+          <div class="card">
+            <strong>BCA</strong>
+            Veer Bahadur Singh Purvanchal University, Jaunpur<br />
+            June 2016 - May 2019
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <strong>Email</strong>
+            abhipandey1150@gmail.com
+          </div>
+          <div class="contact-item">
+            <strong>Phone</strong>
+            +91 9580145142
+          </div>
+          <div class="contact-item">
+            <strong>Location</strong>
+            Ghaziabad, Uttar Pradesh
+          </div>
+          <div class="contact-item">
+            <strong>LinkedIn</strong>
+            <a href="https://www.linkedin.com/in/abhishek-1104-pandey" target="_blank" rel="noopener"
+              >linkedin.com/in/abhishek-1104-pandey</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 Abhishek Pandey | Java Full Stack Developer
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script type="module">
+      import * as THREE from "https://esm.sh/three@0.162.0";
+      const canvas = document.getElementById("bg-canvas");
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 90;
+
+      const starGeometry = new THREE.BufferGeometry();
+      const starCount = 800;
+      const positions = new Float32Array(starCount * 3);
+      for (let i = 0; i < starCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 320;
+        positions[i + 1] = (Math.random() - 0.5) * 320;
+        positions[i + 2] = (Math.random() - 0.5) * 320;
+      }
+      starGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const starMaterial = new THREE.PointsMaterial({
+        color: 0x38bdf8,
+        size: 1.2,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      scene.add(stars);
+
+      const glowGeometry = new THREE.SphereGeometry(48, 32, 32);
+      const glowMaterial = new THREE.MeshBasicMaterial({
+        color: 0x22c55e,
+        transparent: true,
+        opacity: 0.08,
+      });
+      const glowSphere = new THREE.Mesh(glowGeometry, glowMaterial);
+      glowSphere.position.set(-40, 25, -30);
+      scene.add(glowSphere);
+
+      const animateBackground = () => {
+        stars.rotation.y += 0.0009;
+        stars.rotation.x += 0.0004;
+        glowSphere.rotation.y += 0.0012;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateBackground);
+      };
+      animateBackground();
+
+      window.addEventListener("resize", () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+
+      gsap.from(".hero-meta span", {
+        opacity: 0,
+        y: 18,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+      gsap.from(".hero h1", { opacity: 0, y: 24, duration: 0.7, ease: "power2.out" });
+      gsap.from(".hero p", { opacity: 0, y: 20, duration: 0.7, delay: 0.1 });
+      gsap.from(".cta .btn", { opacity: 0, y: 18, stagger: 0.12, duration: 0.6 });
+      gsap.from(".card", { opacity: 0, y: 24, stagger: 0.08, duration: 0.6 });
+    </script>
+  </body>
+</html>
