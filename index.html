@@ -62,6 +62,19 @@
         background: rgba(2, 6, 23, 0.75);
         backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--border);
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.6), rgba(34, 197, 94, 0.6), transparent);
+        opacity: 0.7;
+        animation: glow 6s linear infinite;
       }
 
       .nav {
@@ -76,6 +89,9 @@
         font-size: 20px;
         letter-spacing: 0.5px;
         color: var(--primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .nav-links {
@@ -91,10 +107,29 @@
         text-decoration: none;
         color: var(--muted);
         transition: 0.2s ease;
+        position: relative;
+        padding-bottom: 6px;
       }
 
       .nav-links a:hover {
         color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
       }
 
       .hero {
@@ -119,14 +154,41 @@
         margin-bottom: 16px;
       }
 
-      .hero h1 span {
-        color: var(--primary);
+      .hero h1 .name-highlight {
+        background: linear-gradient(120deg, #38bdf8, #22c55e, #38bdf8);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 8px 18px rgba(56, 189, 248, 0.35));
+        animation: shimmer 6s ease infinite, namePulse 3.6s ease-in-out infinite;
       }
 
       .hero p {
         color: var(--muted);
         line-height: 1.7;
         margin-bottom: 24px;
+      }
+
+      .hero-summary {
+        position: relative;
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.72);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.4);
+        color: #e2f2ff;
+        text-shadow: 0 0 14px rgba(56, 189, 248, 0.2);
+        overflow: hidden;
+        animation: readablePulse 6s ease-in-out infinite;
+      }
+
+      .hero-summary::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(56, 189, 248, 0.18), transparent);
+        transform: translateX(-120%);
+        animation: readableSweep 7s ease-in-out infinite;
       }
 
       .hero-meta {
@@ -209,6 +271,8 @@
         color: var(--muted);
         margin-bottom: 32px;
         line-height: 1.7;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.18);
+        animation: textGlow 5s ease-in-out infinite;
       }
 
       .grid {
@@ -256,6 +320,15 @@
         border-radius: 14px;
         background: var(--panel-light);
         border: 1px solid rgba(148, 163, 184, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        color: #dbeafe;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.18);
+        animation: textGlow 6s ease-in-out infinite;
+      }
+
+      .list li:hover {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.4);
       }
 
       .skill-tags {
@@ -270,6 +343,13 @@
         background: rgba(148, 163, 184, 0.15);
         border: 1px solid rgba(148, 163, 184, 0.25);
         font-size: 13px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+      }
+
+      .skill-tags span:hover {
+        transform: translateY(-2px);
+        color: #e2f2ff;
+        box-shadow: 0 10px 24px rgba(56, 189, 248, 0.2);
       }
 
       footer {
@@ -277,6 +357,20 @@
         text-align: center;
         color: var(--muted);
         border-top: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.6), rgba(56, 189, 248, 0.6), transparent);
+        opacity: 0.6;
+        animation: glow 7s linear infinite;
       }
 
       header,
@@ -322,6 +416,8 @@
         display: block;
         color: var(--muted);
         font-size: 14px;
+        text-shadow: 0 0 12px rgba(34, 197, 94, 0.18);
+        animation: textGlow 6s ease-in-out infinite;
       }
 
       .profile-links {
@@ -340,6 +436,28 @@
         border-radius: 16px;
         background: var(--panel-light);
         border: 1px solid rgba(148, 163, 184, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        color: #e2e8f0;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+        animation: textGlow 6s ease-in-out infinite;
+      }
+
+      #education .card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+      }
+
+      #education .card:hover {
+        background: rgba(31, 41, 55, 0.9);
+        color: #f8fafc;
+      }
+
+      #education .card:hover strong {
+        animation: educationGlow 1.2s ease-in-out infinite;
+      }
+
+      .contact-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.4);
       }
 
       @keyframes float {
@@ -370,6 +488,88 @@
         100% {
           opacity: 1;
           transform: translateY(0);
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes readablePulse {
+        0%,
+        100% {
+          filter: brightness(1);
+          box-shadow: 0 16px 36px rgba(15, 23, 42, 0.4);
+        }
+        50% {
+          filter: brightness(1.08);
+          box-shadow: 0 20px 42px rgba(56, 189, 248, 0.25);
+        }
+      }
+
+      @keyframes readableSweep {
+        0%,
+        100% {
+          transform: translateX(-120%);
+        }
+        50% {
+          transform: translateX(120%);
+        }
+      }
+
+      @keyframes textGlow {
+        0%,
+        100% {
+          opacity: 0.92;
+          filter: brightness(1);
+        }
+        50% {
+          opacity: 1;
+          filter: brightness(1.1);
+        }
+      }
+
+      @keyframes educationGlow {
+        0%,
+        100% {
+          letter-spacing: 0.6px;
+          text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+        }
+        50% {
+          letter-spacing: 1.4px;
+          text-shadow: 0 0 18px rgba(34, 197, 94, 0.5);
+        }
+      }
+
+      @keyframes namePulse {
+        0%,
+        100% {
+          filter: drop-shadow(0 8px 18px rgba(56, 189, 248, 0.35));
+          letter-spacing: 0.5px;
+        }
+        50% {
+          filter: drop-shadow(0 12px 26px rgba(34, 197, 94, 0.5));
+          letter-spacing: 1.4px;
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          transform: translateX(-30%);
+        }
+        50% {
+          transform: translateX(30%);
+        }
+        100% {
+          transform: translateX(-30%);
         }
       }
 
@@ -410,8 +610,8 @@
             <span class="pill">3.2 Years Experience</span>
             <span class="pill">Spring Boot · AWS · React</span>
           </div>
-          <h1>Abhishek <span>Pandey</span></h1>
-          <p>
+          <h1>Abhishek <span class="name-highlight">Pandey</span></h1>
+          <p class="hero-summary">
             Java Full Stack Developer with 3.2 years of experience designing and developing
             scalable web applications using Java, Spring Boot, React, TypeScript, MySQL, and AWS.
             Experienced in building RESTful APIs, integrating cloud services, and implementing
@@ -600,38 +800,160 @@
       );
       camera.position.z = 90;
 
-      const starGeometry = new THREE.BufferGeometry();
-      const starCount = 800;
-      const positions = new Float32Array(starCount * 3);
-      for (let i = 0; i < starCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 320;
-        positions[i + 1] = (Math.random() - 0.5) * 320;
-        positions[i + 2] = (Math.random() - 0.5) * 320;
-      }
-      starGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      const starMaterial = new THREE.PointsMaterial({
-        color: 0x38bdf8,
-        size: 1.2,
-        transparent: true,
-        opacity: 0.6,
-      });
-      const stars = new THREE.Points(starGeometry, starMaterial);
-      scene.add(stars);
+      const createMilkyWay = () => {
+        const count = 1400;
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+        const colorInside = new THREE.Color(0x38bdf8);
+        const colorOutside = new THREE.Color(0x22c55e);
+        for (let i = 0; i < count; i++) {
+          const radius = Math.random() * 170 + 10;
+          const spin = radius * 0.015;
+          const angle = radius * 0.08 + (Math.random() - 0.5) * 0.6;
+          const x = Math.cos(angle + spin) * radius;
+          const y = (Math.random() - 0.5) * 24;
+          const z = Math.sin(angle + spin) * radius;
+          positions[i * 3] = x;
+          positions[i * 3 + 1] = y;
+          positions[i * 3 + 2] = z;
+          const mixed = colorInside.clone().lerp(colorOutside, radius / 180);
+          colors[i * 3] = mixed.r;
+          colors[i * 3 + 1] = mixed.g;
+          colors[i * 3 + 2] = mixed.b;
+        }
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+        const material = new THREE.PointsMaterial({
+          size: 1.4,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.7,
+          depthWrite: false,
+        });
+        return new THREE.Points(geometry, material);
+      };
 
-      const glowGeometry = new THREE.SphereGeometry(48, 32, 32);
-      const glowMaterial = new THREE.MeshBasicMaterial({
-        color: 0x22c55e,
-        transparent: true,
-        opacity: 0.08,
+      const createDust = () => {
+        const count = 500;
+        const positions = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 420;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 220;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 420;
+        }
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({
+          color: 0x8fb9ff,
+          size: 0.9,
+          transparent: true,
+          opacity: 0.35,
+          depthWrite: false,
+        });
+        return new THREE.Points(geometry, material);
+      };
+
+      const milkyWay = createMilkyWay();
+      milkyWay.rotation.x = 0.35;
+      scene.add(milkyWay);
+
+      const dust = createDust();
+      scene.add(dust);
+
+      const createEarthTexture = () => {
+        const size = 512;
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+        const image = ctx.createImageData(size, size);
+        const data = image.data;
+        for (let y = 0; y < size; y++) {
+          for (let x = 0; x < size; x++) {
+            const u = x / size;
+            const v = y / size;
+            const lon = (u - 0.5) * Math.PI * 2;
+            const lat = (v - 0.5) * Math.PI;
+            const base =
+              Math.sin(lon * 1.9) +
+              Math.cos(lat * 3.2) +
+              Math.sin(lon * 4.3 + lat * 2.7) * 0.6 +
+              Math.sin(lon * 8.1 + lat * 0.9) * 0.2 +
+              Math.sin(lon * 12.7 + lat * 6.3) * 0.15;
+            const land = base > 0.25;
+            const ice = Math.abs(lat) > 1.2;
+            let r = 5;
+            let g = 12;
+            let b = 30;
+            if (land) {
+              r = 20;
+              g = 90;
+              b = 60;
+              if (base > 0.85) {
+                r = 120;
+                g = 90;
+                b = 45;
+              }
+            }
+            if (ice) {
+              r = 190;
+              g = 210;
+              b = 220;
+            }
+            const hash = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+            const rand = hash - Math.floor(hash);
+            if (land && rand > 0.92) {
+              r = Math.min(255, r + 120);
+              g = Math.min(255, g + 140);
+              b = Math.min(255, b + 180);
+            }
+            const index = (x + y * size) * 4;
+            data[index] = r;
+            data[index + 1] = g;
+            data[index + 2] = b;
+            data[index + 3] = 255;
+          }
+        }
+        ctx.putImageData(image, 0, 0);
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.needsUpdate = true;
+        return texture;
+      };
+
+      const earthTexture = createEarthTexture();
+      const earthGeometry = new THREE.SphereGeometry(26, 48, 48);
+      const earthMaterial = new THREE.MeshStandardMaterial({
+        map: earthTexture,
+        emissiveMap: earthTexture,
+        emissive: new THREE.Color(0x112244),
+        emissiveIntensity: 0.35,
       });
-      const glowSphere = new THREE.Mesh(glowGeometry, glowMaterial);
-      glowSphere.position.set(-40, 25, -30);
-      scene.add(glowSphere);
+      const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      earth.position.set(-55, 28, -40);
+      scene.add(earth);
+
+      const earthLight = new THREE.PointLight(0x88ccff, 1.2, 250);
+      earthLight.position.set(-40, 40, 40);
+      scene.add(earthLight);
+
+      const ambient = new THREE.AmbientLight(0x1a2b44, 0.5);
+      scene.add(ambient);
+
+      const pointer = { x: 0, y: 0 };
+      window.addEventListener("mousemove", (event) => {
+        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = (event.clientY / window.innerHeight) * 2 - 1;
+      });
 
       const animateBackground = () => {
-        stars.rotation.y += 0.0009;
-        stars.rotation.x += 0.0004;
-        glowSphere.rotation.y += 0.0012;
+        milkyWay.rotation.y += 0.0006;
+        milkyWay.rotation.z += 0.0004;
+        dust.rotation.y += 0.0003;
+        earth.rotation.y += 0.0015;
+        camera.position.x += (pointer.x * 10 - camera.position.x) * 0.05;
+        camera.position.y += (-pointer.y * 8 - camera.position.y) * 0.05;
+        camera.lookAt(0, 0, 0);
         renderer.render(scene, camera);
         requestAnimationFrame(animateBackground);
       };
@@ -653,9 +975,45 @@
         ease: "power2.out",
       });
       gsap.from(".hero h1", { opacity: 0, y: 24, duration: 0.7, ease: "power2.out" });
+      gsap.from(".hero h1 .name-highlight", {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.8,
+        ease: "power3.out",
+      });
       gsap.from(".hero p", { opacity: 0, y: 20, duration: 0.7, delay: 0.1 });
       gsap.from(".cta .btn", { opacity: 0, y: 18, stagger: 0.12, duration: 0.6 });
       gsap.from(".card", { opacity: 0, y: 24, stagger: 0.08, duration: 0.6 });
+
+      const applyHover = (selector, enterProps, leaveProps) => {
+        document.querySelectorAll(selector).forEach((element) => {
+          element.addEventListener("mouseenter", () => {
+            gsap.to(element, { ...enterProps });
+          });
+          element.addEventListener("mouseleave", () => {
+            gsap.to(element, { ...leaveProps });
+          });
+        });
+      };
+
+      applyHover(".brand", { scale: 1.08, duration: 0.25 }, { scale: 1, duration: 0.25 });
+      applyHover(".nav-links a", { y: -3, duration: 0.25 }, { y: 0, duration: 0.25 });
+      applyHover(".btn", { y: -4, scale: 1.02, duration: 0.25 }, { y: 0, scale: 1, duration: 0.25 });
+      applyHover(".card", { y: -6, scale: 1.01, duration: 0.25 }, { y: 0, scale: 1, duration: 0.25 });
+      applyHover(".list li", { y: -4, scale: 1.01, duration: 0.25 }, { y: 0, scale: 1, duration: 0.25 });
+      applyHover(".skill-tags span", { y: -3, scale: 1.03, duration: 0.25 }, { y: 0, scale: 1, duration: 0.25 });
+      applyHover(".contact-item", { y: -4, scale: 1.01, duration: 0.25 }, { y: 0, scale: 1, duration: 0.25 });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        const target = document.querySelector(link.getAttribute("href"));
+        if (!target) {
+          return;
+        }
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
     </script>
   </body>
 </html>
