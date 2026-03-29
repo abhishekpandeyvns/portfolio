@@ -53,7 +53,7 @@
     .skill-tags{display:flex;flex-wrap:wrap;gap:10px}
     .skill-tags span{padding:8px 14px;border-radius:999px;background:rgba(148,163,184,0.15);border:1px solid rgba(148,163,184,0.25);font-size:13px;transition:transform .2s ease,box-shadow .2s ease,color .2s ease}
     .skill-tags span:hover{transform:translateY(-2px);color:#e2f2ff;box-shadow:0 10px 24px rgba(56,189,248,0.2)}
-    footer{padding:30px 0 40px;text-align:center;color:var(--muted);border-top:1px solid var(--border);position:relative;overflow:hidden}
+    footer{padding:30px 0 100px;text-align:center;color:var(--muted);border-top:1px solid var(--border);position:relative;overflow:hidden}
     footer::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,rgba(34,197,94,0.6),rgba(56,189,248,0.6),transparent);opacity:.6;animation:glow 7s linear infinite}
     header,main,footer{position:relative;z-index:1}
     .profile-card{display:grid;gap:16px}
@@ -70,28 +70,47 @@
     #education .card:hover strong{animation:educationGlow 1.2s ease-in-out infinite}
     .contact-item:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(15,23,42,0.4)}
 
-    /* ====== CHARACTER ====== */
-    #char-wrap{position:fixed;bottom:0;z-index:9999;pointer-events:none;will-change:transform}
-    #char-wrap svg{display:block;pointer-events:all;cursor:pointer;filter:drop-shadow(0 6px 18px rgba(56,189,248,0.35))}
-    #char-wrap svg:hover{filter:drop-shadow(0 8px 28px rgba(56,189,248,0.6))}
-    #char-bubble{position:absolute;bottom:155px;left:50%;transform:translateX(-50%);background:#1a2540;border:1.5px solid rgba(56,189,248,0.5);border-radius:16px;padding:9px 15px;font-size:12px;font-family:Inter,sans-serif;color:#e2e8f0;white-space:nowrap;opacity:0;transition:opacity .35s ease;pointer-events:none;box-shadow:0 8px 28px rgba(0,0,0,0.5);min-width:80px;text-align:center}
+    /* ===== OFFICE CORNER ===== */
+    #office-corner{position:fixed;bottom:0;right:0;z-index:9998;width:320px;height:200px;pointer-events:none}
+    /* ===== WALKING CHARACTER ===== */
+    #char-wrap{position:fixed;bottom:0;left:0;top:0;z-index:9999;pointer-events:none;will-change:transform}
+    #char-wrap svg{display:block;pointer-events:all;cursor:pointer}
+    #char-bubble{
+      position:absolute;bottom:158px;left:50%;
+      background:#1a2540;border:1.5px solid rgba(56,189,248,0.55);
+      border-radius:16px;padding:9px 15px;font-size:12px;
+      font-family:Inter,sans-serif;color:#e2e8f0;white-space:nowrap;
+      opacity:0;transition:opacity .35s ease;pointer-events:none;
+      box-shadow:0 8px 28px rgba(0,0,0,0.55);min-width:80px;text-align:center
+    }
     #char-bubble::after{content:'';position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid #1a2540}
-    /* emotion particles */
-    .emo-particle{position:absolute;font-size:14px;pointer-events:none;animation:emoFloat 1.4s ease forwards}
-    @keyframes emoFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(1.5)}}
-    /* ====== END CHARACTER ====== */
+    /* Thought bubble for thinking state */
+    #char-thought{
+      position:absolute;bottom:162px;left:50%;transform:translateX(-50%);
+      background:#1f2d50;border:1.5px solid rgba(139,92,246,0.5);
+      border-radius:18px;padding:10px 14px;font-size:11px;
+      font-family:Inter,sans-serif;color:#c4b5fd;white-space:nowrap;
+      opacity:0;transition:opacity .4s ease;pointer-events:none;
+      box-shadow:0 6px 20px rgba(139,92,246,0.25)
+    }
+    #char-thought::before{content:'';position:absolute;bottom:-14px;left:40%;width:8px;height:8px;border-radius:50%;background:#1f2d50;border:1px solid rgba(139,92,246,0.4)}
+    #char-thought::after{content:'';position:absolute;bottom:-22px;left:36%;width:5px;height:5px;border-radius:50%;background:#1f2d50;border:1px solid rgba(139,92,246,0.3)}
+    /* Screen glow for coding mode */
+    #screen-glow{position:absolute;bottom:160px;left:50%;transform:translateX(-50%);width:60px;height:40px;background:radial-gradient(ellipse,rgba(56,189,248,0.35) 0%,transparent 70%);border-radius:8px;opacity:0;transition:opacity .5s ease;pointer-events:none}
 
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     @keyframes pulse{0%,100%{box-shadow:0 12px 24px rgba(56,189,248,0.25)}50%{box-shadow:0 20px 36px rgba(56,189,248,0.45)}}
     @keyframes fadeUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
     @keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    @keyframes readablePulse{0%,100%{filter:brightness(1);box-shadow:0 16px 36px rgba(15,23,42,0.4)}50%{filter:brightness(1.08);box-shadow:0 20px 42px rgba(56,189,248,0.25)}}
+    @keyframes readablePulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
     @keyframes readableSweep{0%,100%{transform:translateX(-120%)}50%{transform:translateX(120%)}}
     @keyframes textGlow{0%,100%{opacity:.92;filter:brightness(1)}50%{opacity:1;filter:brightness(1.1)}}
     @keyframes educationGlow{0%,100%{letter-spacing:.6px;text-shadow:0 0 10px rgba(56,189,248,0.35)}50%{letter-spacing:1.4px;text-shadow:0 0 18px rgba(34,197,94,0.5)}}
     @keyframes namePulse{0%,100%{filter:drop-shadow(0 8px 18px rgba(56,189,248,0.35));letter-spacing:.5px}50%{filter:drop-shadow(0 12px 26px rgba(34,197,94,0.5));letter-spacing:1.4px}}
     @keyframes glow{0%{transform:translateX(-30%)}50%{transform:translateX(30%)}100%{transform:translateX(-30%)}}
-    @media(max-width:720px){.nav{flex-direction:column;gap:12px}.nav-links{flex-wrap:wrap;justify-content:center}}
+    @keyframes screenPulse{0%,100%{opacity:.7}50%{opacity:1}}
+    @keyframes typingCursor{0%,100%{opacity:1}50%{opacity:0}}
+    @media(max-width:720px){.nav{flex-direction:column;gap:12px}.nav-links{flex-wrap:wrap;justify-content:center}#office-corner{width:220px;height:140px}}
   </style>
 </head>
 <body>
@@ -137,10 +156,7 @@
     <div class="hero-card">
       <div class="profile-card">
         <div class="avatar">AP</div>
-        <div>
-          <div class="profile-name">Abhishek Pandey</div>
-          <div class="profile-role">Java Full Stack Developer</div>
-        </div>
+        <div><div class="profile-name">Abhishek Pandey</div><div class="profile-role">Java Full Stack Developer</div></div>
         <div class="profile-info">
           <span>Ghaziabad, Uttar Pradesh</span>
           <span>abhipandey1150@gmail.com</span>
@@ -158,66 +174,52 @@
     <h2 class="section-title">Work Experience</h2>
     <p class="section-subtitle">Java Backend Developer — Virtusa Systems Software, US Virginia (07/2022 to Present)</p>
     <div class="grid two">
-      <div class="card">
-        <strong>E-learning Platform</strong>
-        <ul class="list">
-          <li>Developed a scalable e-learning platform supporting role-based scheduling for administrators, instructors, and students.</li>
-          <li>Enabled schedule creation, editing, and viewing tailored to user permissions, improving usability and content access.</li>
-          <li>Integrated calendar synchronization with automated reminders via email and push notifications.</li>
-          <li>Supported multi-device compatibility with responsive views embedded into external subscriber portals.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <strong>Backend Architecture & DevOps</strong>
-        <ul class="list">
-          <li>Built AWS Lambda functions to dynamically refresh database views and improve data accuracy in real time.</li>
-          <li>Designed a multi-tenant system allowing schools to register independently and manage users and content.</li>
-          <li>Implemented secure and customized payment gateways for each institution.</li>
-          <li>Implemented CI/CD pipelines using GitHub Actions to automate builds and streamline deployments.</li>
-        </ul>
-      </div>
+      <div class="card"><strong>E-learning Platform</strong><ul class="list">
+        <li>Developed a scalable e-learning platform supporting role-based scheduling for administrators, instructors, and students.</li>
+        <li>Enabled schedule creation, editing, and viewing tailored to user permissions, improving usability and content access.</li>
+        <li>Integrated calendar synchronization with automated reminders via email and push notifications.</li>
+        <li>Supported multi-device compatibility with responsive views embedded into external subscriber portals.</li>
+      </ul></div>
+      <div class="card"><strong>Backend Architecture &amp; DevOps</strong><ul class="list">
+        <li>Built AWS Lambda functions to dynamically refresh database views and improve data accuracy in real time.</li>
+        <li>Designed a multi-tenant system allowing schools to register independently and manage users and content.</li>
+        <li>Implemented secure and customized payment gateways for each institution.</li>
+        <li>Implemented CI/CD pipelines using GitHub Actions to automate builds and streamline deployments.</li>
+      </ul></div>
     </div>
   </section>
 
   <section id="projects">
     <h2 class="section-title">Projects</h2>
     <div class="grid two">
-      <div class="card">
-        <strong>Spot Billing Application</strong>
-        <ul class="list">
-          <li>Engineered a real-time billing solution enabling electric meter reading and instant bill generation at customer locations.</li>
-          <li>Automated data capture and billing uploads for accurate on-site invoicing with minimal latency.</li>
-          <li>Designed role-based access controls for secure and flexible usage.</li>
-          <li>Resolved critical production issues and improved system stability by modernizing legacy code.</li>
-          <li>Delivered responsive web interfaces for field operators to ensure smooth data entry and usability.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <strong>Tech Stack</strong>
-        <ul class="list">
-          <li>Java, Spring Boot, Microservices, REST APIs, Spring Data JPA.</li>
-          <li>MySQL, MariaDB, Docker, AWS (Lambda, EC2, S3).</li>
-          <li>Git, GitHub Actions, CI/CD automation.</li>
-          <li>React, TypeScript, responsive UI delivery.</li>
-        </ul>
-      </div>
+      <div class="card"><strong>Spot Billing Application</strong><ul class="list">
+        <li>Engineered a real-time billing solution enabling electric meter reading and instant bill generation at customer locations.</li>
+        <li>Automated data capture and billing uploads for accurate on-site invoicing with minimal latency.</li>
+        <li>Designed role-based access controls for secure and flexible usage.</li>
+        <li>Resolved critical production issues and improved system stability by modernizing legacy code.</li>
+        <li>Delivered responsive web interfaces for field operators to ensure smooth data entry and usability.</li>
+      </ul></div>
+      <div class="card"><strong>Tech Stack</strong><ul class="list">
+        <li>Java, Spring Boot, Microservices, REST APIs, Spring Data JPA.</li>
+        <li>MySQL, MariaDB, Docker, AWS (Lambda, EC2, S3).</li>
+        <li>Git, GitHub Actions, CI/CD automation.</li>
+        <li>React, TypeScript, responsive UI delivery.</li>
+      </ul></div>
     </div>
   </section>
 
   <section id="skills">
     <h2 class="section-title">Skills</h2>
-    <div class="card">
-      <div class="skill-tags">
-        <span>Core Java</span><span>Spring Boot</span><span>AWS</span><span>CI/CD</span>
-        <span>GitHub Actions</span><span>RESTful Services</span><span>Git Version Control</span>
-        <span>MySQL/MariaDB</span><span>Spring Security</span><span>Multi-Threading</span>
-        <span>Data Structures and Algorithms</span><span>Spring Data JPA</span><span>JUnit Testing</span>
-        <span>Spring Framework</span><span>Object-Oriented Programming</span><span>Backend Development</span>
-        <span>Skilled in Adaptability</span><span>Teamwork</span><span>Creativity</span>
-        <span>DevOps</span><span>Docker</span><span>Software Updates</span>
-        <span>Application Design</span><span>Design Principles</span><span>Code Reviews</span>
-      </div>
-    </div>
+    <div class="card"><div class="skill-tags">
+      <span>Core Java</span><span>Spring Boot</span><span>AWS</span><span>CI/CD</span>
+      <span>GitHub Actions</span><span>RESTful Services</span><span>Git Version Control</span>
+      <span>MySQL/MariaDB</span><span>Spring Security</span><span>Multi-Threading</span>
+      <span>Data Structures and Algorithms</span><span>Spring Data JPA</span><span>JUnit Testing</span>
+      <span>Spring Framework</span><span>Object-Oriented Programming</span><span>Backend Development</span>
+      <span>Skilled in Adaptability</span><span>Teamwork</span><span>Creativity</span>
+      <span>DevOps</span><span>Docker</span><span>Software Updates</span>
+      <span>Application Design</span><span>Design Principles</span><span>Code Reviews</span>
+    </div></div>
   </section>
 
   <section id="education">
@@ -234,122 +236,212 @@
       <div class="contact-item"><strong>Email</strong> abhipandey1150@gmail.com</div>
       <div class="contact-item"><strong>Phone</strong> +91 9580145142</div>
       <div class="contact-item"><strong>Location</strong> Ghaziabad, Uttar Pradesh</div>
-      <div class="contact-item"><strong>LinkedIn</strong>
-        <a href="https://www.linkedin.com/in/abhishek-1104-pandey" target="_blank" rel="noopener">linkedin.com/in/abhishek-1104-pandey</a>
-      </div>
+      <div class="contact-item"><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/abhishek-1104-pandey" target="_blank" rel="noopener">linkedin.com/in/abhishek-1104-pandey</a></div>
     </div>
   </section>
 </main>
 
 <footer>© 2026 Abhishek Pandey | Java Full Stack Developer</footer>
 
-<!-- ======= ANIMATED CHARACTER ======= -->
+<!-- ===== OFFICE CORNER (bottom-right) ===== -->
+<div id="office-corner">
+  <svg width="320" height="200" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Floor/wall corner -->
+    <rect x="0" y="150" width="320" height="50" fill="#0d1625" rx="0"/>
+    <rect x="0" y="0" width="18" height="200" fill="#0d1625"/>
+    <!-- Wall shelf line -->
+    <line x1="18" y1="60" x2="320" y2="60" stroke="#1e2d47" stroke-width="1"/>
+    <!-- DESK -->
+    <rect x="30" y="135" width="280" height="18" rx="4" fill="#1e3a5f" stroke="#2d5080" stroke-width="1"/>
+    <rect x="30" y="153" width="14" height="30" rx="3" fill="#162d4a"/>
+    <rect x="296" y="153" width="14" height="30" rx="3" fill="#162d4a"/>
+    <!-- MONITOR -->
+    <rect x="80" y="72" width="110" height="70" rx="6" fill="#0a1628" stroke="#38bdf8" stroke-width="1.5"/>
+    <!-- Screen content - code lines (animated) -->
+    <rect x="86" y="78" width="98" height="58" rx="3" fill="#050e1c"/>
+    <!-- Code lines on screen -->
+    <rect id="code-l1" x="90" y="83" width="55" height="3" rx="1.5" fill="#38bdf8" opacity="0.8"/>
+    <rect id="code-l2" x="90" y="90" width="70" height="3" rx="1.5" fill="#22c55e" opacity="0.7"/>
+    <rect id="code-l3" x="94" y="97" width="45" height="3" rx="1.5" fill="#fbbf24" opacity="0.6"/>
+    <rect id="code-l4" x="94" y="104" width="60" height="3" rx="1.5" fill="#22c55e" opacity="0.7"/>
+    <rect id="code-l5" x="90" y="111" width="50" height="3" rx="1.5" fill="#38bdf8" opacity="0.8"/>
+    <rect id="code-l6" x="94" y="118" width="40" height="3" rx="1.5" fill="#f87171" opacity="0.6"/>
+    <!-- Cursor blink -->
+    <rect id="code-cursor" x="90" y="125" width="6" height="3" rx="1" fill="#e2e8f0" opacity="1">
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Monitor stand -->
+    <rect x="128" y="142" width="14" height="10" rx="2" fill="#1e3a5f"/>
+    <rect x="118" y="150" width="34" height="5" rx="2" fill="#1e3a5f"/>
+    <!-- Monitor glow -->
+    <rect x="80" y="72" width="110" height="70" rx="6" fill="rgba(56,189,248,0.04)"/>
+    <!-- KEYBOARD -->
+    <rect x="75" y="140" width="90" height="12" rx="3" fill="#162d4a" stroke="#2d5080" stroke-width="0.8"/>
+    <rect x="79" y="143" width="82" height="6" rx="1.5" fill="#0d1e35"/>
+    <!-- keyboard keys hint -->
+    <rect x="81" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="89" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="97" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="105" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="113" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="121" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="129" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="137" y="144" width="6" height="4" rx="1" fill="#1e3a5f"/>
+    <rect x="145" y="144" width="12" height="4" rx="1" fill="#1e3a5f"/>
+    <!-- MOUSE -->
+    <rect x="175" y="139" width="20" height="14" rx="6" fill="#162d4a" stroke="#2d5080" stroke-width="0.8"/>
+    <line x1="185" y1="139" x2="185" y2="149" stroke="#2d5080" stroke-width="0.8"/>
+    <!-- COFFEE MUG -->
+    <rect x="210" y="120" width="22" height="20" rx="4" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.8"/>
+    <path d="M232 126 Q240 126 240 131 Q240 136 232 136" stroke="#38bdf8" stroke-width="1.2" fill="none"/>
+    <!-- Steam from coffee -->
+    <path id="steam1" d="M215 120 Q217 114 215 108" stroke="rgba(56,189,248,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M215 120 Q217 114 215 108;M215 120 Q213 114 215 108;M215 120 Q217 114 215 108" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path id="steam2" d="M221 120 Q223 113 221 106" stroke="rgba(56,189,248,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round">
+      <animate attributeName="d" values="M221 120 Q223 113 221 106;M221 120 Q219 113 221 106;M221 120 Q223 113 221 106" dur="2.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.4s" repeatCount="indefinite"/>
+    </path>
+    <!-- Plant pot -->
+    <rect x="255" y="118" width="28" height="18" rx="3" fill="#162d4a" stroke="#2d5080" stroke-width="0.8"/>
+    <path d="M269 118 Q265 105 260 100 Q265 108 269 118Z" fill="#22c55e" opacity="0.9"/>
+    <path d="M269 118 Q273 103 278 100 Q273 108 269 118Z" fill="#22c55e" opacity="0.9"/>
+    <path d="M269 118 Q269 104 269 96" stroke="#22c55e" stroke-width="1.5" fill="none"/>
+    <ellipse cx="269" cy="118" rx="14" ry="3" fill="#1a3d2a"/>
+    <!-- Books stack on shelf -->
+    <rect x="20" y="38" width="10" height="22" rx="1" fill="#38bdf8" opacity="0.7"/>
+    <rect x="31" y="40" width="10" height="20" rx="1" fill="#22c55e" opacity="0.7"/>
+    <rect x="42" y="36" width="10" height="24" rx="1" fill="#fbbf24" opacity="0.7"/>
+    <rect x="53" y="42" width="10" height="18" rx="1" fill="#f87171" opacity="0.7"/>
+    <!-- Sitting character placeholder (visible when coding mode) -->
+    <g id="sitting-char" opacity="0">
+      <!-- Chair -->
+      <rect x="195" y="105" width="55" height="35" rx="6" fill="#162d4a" stroke="#2d5080" stroke-width="1"/>
+      <rect x="193" y="98" width="59" height="10" rx="4" fill="#1e3a5f" stroke="#2d5080" stroke-width="1"/>
+      <rect x="196" y="140" width="8" height="20" rx="3" fill="#162d4a"/>
+      <rect x="241" y="140" width="8" height="20" rx="3" fill="#162d4a"/>
+    </g>
+  </svg>
+</div>
+
+<!-- ===== WALKING CHARACTER ===== -->
 <div id="char-wrap">
   <div id="char-bubble"></div>
+  <div id="char-thought"></div>
+  <div id="screen-glow"></div>
   <svg id="char-svg" width="90" height="150" viewBox="0 0 90 150" xmlns="http://www.w3.org/2000/svg">
-    <!-- SHADOW -->
+    <defs>
+      <radialGradient id="headGrad" cx="45%" cy="38%" r="58%">
+        <stop offset="0%" stop-color="#fde68a"/>
+        <stop offset="100%" stop-color="#f59e0b"/>
+      </radialGradient>
+    </defs>
     <ellipse id="c-shadow" cx="45" cy="148" rx="22" ry="5" fill="rgba(56,189,248,0.18)"/>
-    <!-- LEFT LEG -->
-    <g id="c-leg-l">
-      <rect x="30" y="103" width="13" height="28" rx="6" fill="#1e3060"/>
-      <ellipse cx="36" cy="133" rx="10" ry="5" fill="#0f1a35" stroke="#38bdf8" stroke-width="0.8"/>
-    </g>
-    <!-- RIGHT LEG -->
-    <g id="c-leg-r">
-      <rect x="47" y="103" width="13" height="28" rx="6" fill="#1e3060"/>
-      <ellipse cx="53" cy="133" rx="10" ry="5" fill="#0f1a35" stroke="#38bdf8" stroke-width="0.8"/>
-    </g>
-    <!-- BODY / SUIT JACKET -->
+    <!-- Legs -->
+    <g id="c-leg-l"><rect x="30" y="103" width="13" height="28" rx="6" fill="#1e3060"/><ellipse cx="36" cy="133" rx="10" ry="5" fill="#0f1a35" stroke="#38bdf8" stroke-width="0.8"/></g>
+    <g id="c-leg-r"><rect x="47" y="103" width="13" height="28" rx="6" fill="#1e3060"/><ellipse cx="53" cy="133" rx="10" ry="5" fill="#0f1a35" stroke="#38bdf8" stroke-width="0.8"/></g>
+    <!-- Body/suit -->
     <rect x="22" y="62" width="46" height="48" rx="14" fill="#1a2d5a"/>
-    <!-- Suit lapels -->
     <path d="M45 65 L34 78 L45 82 Z" fill="#162348"/>
     <path d="M45 65 L56 78 L45 82 Z" fill="#162348"/>
-    <!-- White shirt -->
     <rect x="41" y="66" width="8" height="16" rx="2" fill="#dbeafe" opacity="0.9"/>
-    <!-- Tie -->
     <path d="M45 66 L42 74 L45 80 L48 74 Z" fill="#38bdf8"/>
     <path d="M43 70 L42 74 L45 80 L48 74 L47 70 Z" fill="#0ea5e9"/>
-    <!-- Suit buttons -->
     <circle cx="45" cy="90" r="2" fill="#162348"/>
     <circle cx="45" cy="97" r="2" fill="#162348"/>
-    <!-- Suit pocket -->
     <rect x="52" y="72" width="10" height="6" rx="2" fill="#162348"/>
     <rect x="54" y="70" width="6" height="3" rx="1" fill="#93c5fd" opacity="0.8"/>
-    <!-- LEFT ARM -->
+    <!-- Arms -->
     <g id="c-arm-l" style="transform-origin:28px 68px">
       <rect x="12" y="64" width="17" height="11" rx="5.5" fill="#1a2d5a"/>
-      <!-- Left hand -->
       <ellipse cx="13" cy="70" rx="6" ry="7" fill="#fde68a"/>
       <ellipse cx="11" cy="67" rx="2" ry="2.5" fill="#fcd34d"/>
       <ellipse cx="14" cy="65" rx="2" ry="2.5" fill="#fcd34d"/>
     </g>
-    <!-- RIGHT ARM -->
     <g id="c-arm-r" style="transform-origin:62px 68px">
       <rect x="61" y="64" width="17" height="11" rx="5.5" fill="#1a2d5a"/>
-      <!-- Right hand -->
       <ellipse cx="77" cy="70" rx="6" ry="7" fill="#fde68a"/>
       <ellipse cx="76" cy="67" rx="2" ry="2.5" fill="#fcd34d"/>
       <ellipse cx="79" cy="65" rx="2" ry="2.5" fill="#fcd34d"/>
     </g>
-    <!-- NECK -->
     <rect x="39" y="54" width="12" height="12" rx="4" fill="#fde68a"/>
-    <!-- HEAD -->
-    <ellipse cx="45" cy="36" rx="26" ry="24" fill="#fde68a" stroke="#f59e0b" stroke-width="1.2"/>
-    <!-- HAIR -->
-    <ellipse cx="45" cy="14" rx="24" ry="11" fill="#7c2d12"/>
-    <ellipse cx="22" cy="22" rx="7" ry="9" fill="#7c2d12"/>
-    <ellipse cx="68" cy="22" rx="7" ry="9" fill="#7c2d12"/>
-    <ellipse cx="33" cy="13" rx="9" ry="6" fill="#7c2d12"/>
-    <ellipse cx="57" cy="13" rx="9" ry="6" fill="#7c2d12"/>
-    <!-- Hair strand -->
-    <path d="M45 5 Q48 1 50 6" stroke="#7c2d12" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <!-- EARS -->
+    <!-- Head -->
+    <ellipse cx="45" cy="36" rx="26" ry="24" fill="url(#headGrad)" stroke="#f59e0b" stroke-width="1.2"/>
+    <!-- BLACK hair (updated) -->
+    <ellipse cx="45" cy="14" rx="24" ry="11" fill="#1a1a2e"/>
+    <ellipse cx="22" cy="22" rx="7" ry="9" fill="#1a1a2e"/>
+    <ellipse cx="68" cy="22" rx="7" ry="9" fill="#1a1a2e"/>
+    <ellipse cx="33" cy="13" rx="9" ry="6" fill="#1a1a2e"/>
+    <ellipse cx="57" cy="13" rx="9" ry="6" fill="#1a1a2e"/>
+    <path d="M45 5 Q48 1 50 6" stroke="#1a1a2e" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Ears -->
     <ellipse cx="19" cy="36" rx="4" ry="5" fill="#f59e0b"/>
     <ellipse cx="71" cy="36" rx="4" ry="5" fill="#f59e0b"/>
-    <!-- BLUSH -->
+    <!-- Blush -->
     <ellipse id="c-blush-l" cx="26" cy="43" rx="7" ry="4.5" fill="#fca5a5" opacity="0"/>
     <ellipse id="c-blush-r" cx="64" cy="43" rx="7" ry="4.5" fill="#fca5a5" opacity="0"/>
-    <!-- SWEAT -->
+    <!-- Sweat -->
     <ellipse id="c-sw1" cx="72" cy="20" rx="3.5" ry="5" fill="#93c5fd" opacity="0"/>
     <ellipse id="c-sw2" cx="78" cy="30" rx="2.5" ry="4" fill="#93c5fd" opacity="0"/>
-    <!-- STARS -->
-    <text id="c-st1" x="2"  y="18" font-size="13" opacity="0" fill="#fbbf24">★</text>
-    <text id="c-st2" x="72" y="14" font-size="11" opacity="0" fill="#22c55e">✦</text>
-    <text id="c-st3" x="5"  y="44" font-size="9"  opacity="0" fill="#38bdf8">★</text>
-    <!-- HEARTS (contact section) -->
-    <text id="c-heart1" x="4"  y="16" font-size="13" opacity="0" fill="#f472b6">♥</text>
-    <text id="c-heart2" x="72" y="12" font-size="10" opacity="0" fill="#fb7185">♥</text>
-    <!-- ZZZ (idle) -->
-    <text id="c-zzz1" x="68" y="16" font-size="10" opacity="0" fill="#94a3b8">z</text>
-    <text id="c-zzz2" x="74" y="10" font-size="12" opacity="0" fill="#94a3b8">z</text>
-    <!-- LIGHT BULB (projects) -->
-    <text id="c-bulb" x="68" y="16" font-size="18" opacity="0" fill="#fbbf24">💡</text>
-    <!-- EYE WHITES -->
+    <!-- Stars -->
+    <text id="c-st1" x="2"  y="18" font-size="13" opacity="0" fill="#fbbf24" font-family="sans-serif">★</text>
+    <text id="c-st2" x="72" y="14" font-size="11" opacity="0" fill="#22c55e" font-family="sans-serif">✦</text>
+    <text id="c-st3" x="5"  y="44" font-size="9"  opacity="0" fill="#38bdf8" font-family="sans-serif">★</text>
+    <!-- Hearts -->
+    <text id="c-heart1" x="4"  y="16" font-size="13" opacity="0" fill="#f472b6" font-family="sans-serif">♥</text>
+    <text id="c-heart2" x="72" y="12" font-size="10" opacity="0" fill="#fb7185" font-family="sans-serif">♥</text>
+    <!-- ZZZ -->
+    <text id="c-zzz1" x="68" y="16" font-size="10" opacity="0" fill="#94a3b8" font-family="sans-serif">z</text>
+    <text id="c-zzz2" x="74" y="10" font-size="12" opacity="0" fill="#94a3b8" font-family="sans-serif">Z</text>
+    <!-- Bulb -->
+    <text id="c-bulb" x="68" y="16" font-size="18" opacity="0" font-family="sans-serif">💡</text>
+    <!-- Code symbols (coding mode) -->
+    <text id="c-code1" x="68" y="14" font-size="9" opacity="0" fill="#38bdf8" font-family="monospace">&lt;/&gt;</text>
+    <text id="c-code2" x="2"  y="14" font-size="9" opacity="0" fill="#22c55e" font-family="monospace">{}</text>
+    <!-- Thinking dots -->
+    <circle id="c-think1" cx="68" cy="12" r="3" fill="#c4b5fd" opacity="0"/>
+    <circle id="c-think2" cx="75" cy="8"  r="4" fill="#c4b5fd" opacity="0"/>
+    <circle id="c-think3" cx="82" cy="4"  r="5" fill="#c4b5fd" opacity="0"/>
+    <!-- Eye whites -->
     <ellipse cx="35" cy="34" rx="8" ry="9" fill="white"/>
     <ellipse cx="55" cy="34" rx="8" ry="9" fill="white"/>
-    <!-- PUPILS -->
+    <!-- Pupils -->
     <circle id="c-pl" cx="35" cy="35" r="4.5" fill="#1e293b"/>
     <circle cx="37" cy="33" r="1.4" fill="white"/>
     <circle id="c-pr" cx="55" cy="35" r="4.5" fill="#1e293b"/>
     <circle cx="57" cy="33" r="1.4" fill="white"/>
-    <!-- EYEBROWS -->
-    <path id="c-bl" d="M27 23 Q35 19 43 23" stroke="#92400e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <path id="c-br" d="M47 23 Q55 19 63 23" stroke="#92400e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-    <!-- MOUTH -->
+    <!-- Eyebrows -->
+    <path id="c-bl" d="M27 23 Q35 19 43 23" stroke="#333" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path id="c-br" d="M47 23 Q55 19 63 23" stroke="#333" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <!-- Mouth -->
     <path id="c-mouth" d="M37 47 Q45 53 53 47" stroke="#92400e" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <!-- GLASSES (education) -->
+    <!-- Glasses (education) -->
     <g id="c-glasses" opacity="0">
       <circle cx="35" cy="34" r="9" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.8"/>
       <circle cx="55" cy="34" r="9" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.8"/>
       <line x1="44" y1="34" x2="46" y2="34" stroke="#38bdf8" stroke-width="1.5"/>
     </g>
+    <!-- Laptop (only visible in coding mode) -->
+    <g id="c-laptop" opacity="0">
+      <rect x="8" y="88" width="36" height="24" rx="3" fill="#0a1628" stroke="#38bdf8" stroke-width="1.2"/>
+      <rect x="10" y="90" width="32" height="20" rx="2" fill="#050e1c"/>
+      <!-- tiny code lines on laptop -->
+      <rect x="12" y="93" width="16" height="2" rx="1" fill="#38bdf8" opacity="0.8"/>
+      <rect x="12" y="97" width="22" height="2" rx="1" fill="#22c55e" opacity="0.7"/>
+      <rect x="14" y="101" width="14" height="2" rx="1" fill="#fbbf24" opacity="0.6"/>
+      <rect x="12" y="105" width="18" height="2" rx="1" fill="#38bdf8" opacity="0.8"/>
+      <rect id="lap-cursor" x="12" y="109" width="4" height="2" rx="1" fill="#e2e8f0" opacity="0.9"/>
+      <rect x="7" y="112" width="38" height="4" rx="2" fill="#162348" stroke="#38bdf8" stroke-width="0.8"/>
+    </g>
   </svg>
 </div>
-<!-- ======= END CHARACTER ======= -->
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <script type="module">
 import * as THREE from "https://esm.sh/three@0.162.0";
+
+// ── ORIGINAL BACKGROUND (exact same as v2) ──
 const canvas=document.getElementById("bg-canvas");
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
@@ -357,6 +449,7 @@ renderer.setSize(window.innerWidth,window.innerHeight);
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
 camera.position.z=90;
+
 const createMilkyWay=()=>{
   const count=1400,positions=new Float32Array(count*3),colors=new Float32Array(count*3);
   const ci=new THREE.Color(0x38bdf8),co=new THREE.Color(0x22c55e);
@@ -376,8 +469,11 @@ const createDust=()=>{
   const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.BufferAttribute(positions,3));
   return new THREE.Points(g,new THREE.PointsMaterial({color:0x8fb9ff,size:0.9,transparent:true,opacity:0.35,depthWrite:false}));
 };
+
 const mw=createMilkyWay();mw.rotation.x=0.35;scene.add(mw);
 const dust=createDust();scene.add(dust);
+
+// ── ORIGINAL EARTH ──
 const createEarth=()=>{
   const s=512,c=document.createElement("canvas");c.width=s;c.height=s;
   const ctx=c.getContext("2d"),img=ctx.createImageData(s,s),d=img.data;
@@ -398,13 +494,74 @@ const earth=new THREE.Mesh(new THREE.SphereGeometry(26,48,48),new THREE.MeshStan
 earth.position.set(-55,28,-40);scene.add(earth);
 scene.add(new THREE.PointLight(0x88ccff,1.2,250));
 scene.add(new THREE.AmbientLight(0x1a2b44,.5));
+
+// ── SATELLITES (new addition, slow & realistic) ──
+const sats=[];
+const EP=new THREE.Vector3(-55,28,-40);
+
+function makeSat(isHuman,sz){
+  const g=new THREE.Group();
+  if(isHuman){
+    // Body
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(sz*1.3,sz*0.6,sz*0.6),new THREE.MeshStandardMaterial({color:0xb0bec5,metalness:.8,roughness:.25})),{}));
+    // Solar panels
+    [-1,1].forEach(s=>{
+      const p=new THREE.Mesh(new THREE.BoxGeometry(sz*2.2,sz*0.05,sz*0.85),new THREE.MeshStandardMaterial({color:0x1a3a6e,roughness:.6}));
+      p.position.x=s*sz*1.75;g.add(p);
+    });
+    // Dish
+    const d=new THREE.Mesh(new THREE.CylinderGeometry(sz*.3,sz*.07,sz*.18,10,1,true),new THREE.MeshStandardMaterial({color:0xeceff1,metalness:.9,side:THREE.DoubleSide}));
+    d.position.set(0,sz*.38,0);g.add(d);
+  } else {
+    // Rocky moon chunk
+    const tc=document.createElement("canvas");tc.width=128;tc.height=128;
+    const tctx=tc.getContext("2d"),tid=tctx.createImageData(128,128),td=tid.data;
+    for(let i=0;i<128*128;i++){const v=100+Math.random()*40+(Math.sin(i*.07))*15;td[i*4]=v;td[i*4+1]=v*.97;td[i*4+2]=v*.93;td[i*4+3]=255;}
+    tctx.putImageData(tid,0,0);
+    g.add(new THREE.Mesh(new THREE.SphereGeometry(sz,10,8),new THREE.MeshStandardMaterial({map:new THREE.CanvasTexture(tc),roughness:.95})));
+  }
+  scene.add(g);
+  return g;
+}
+
+// Add satellites: human-made (slow orbits) + natural
+[
+  {r:42,inc:.25,ph:0.0, spd:.003,human:true, sz:.7},
+  {r:52,inc:1.0,ph:2.1, spd:.002,human:true, sz:.5},
+  {r:46,inc:-.4,ph:3.8, spd:.0025,human:true,sz:.55},
+  {r:58,inc:.6, ph:5.5, spd:.0015,human:true,sz:.4},
+  {r:65,inc:.15,ph:1.4, spd:.001,human:false,sz:1.6},
+  {r:72,inc:-.7,ph:4.0, spd:.0008,human:false,sz:1.1},
+].forEach(cfg=>{
+  const mesh=makeSat(cfg.human,cfg.sz);
+  sats.push({mesh,r:cfg.r,inc:cfg.inc,ph:cfg.ph,spd:cfg.spd,human:cfg.human});
+});
+
 const pointer={x:0,y:0};
 window.addEventListener("mousemove",e=>{pointer.x=(e.clientX/window.innerWidth)*2-1;pointer.y=(e.clientY/window.innerHeight)*2-1;});
-(function loop(){mw.rotation.y+=.0006;mw.rotation.z+=.0004;dust.rotation.y+=.0003;earth.rotation.y+=.0015;
-camera.position.x+=(pointer.x*10-camera.position.x)*.05;camera.position.y+=(-pointer.y*8-camera.position.y)*.05;
-camera.lookAt(0,0,0);renderer.render(scene,camera);requestAnimationFrame(loop);})();
+
+(function loop(){
+  // Original speeds — exact same as v2
+  mw.rotation.y+=.0006;mw.rotation.z+=.0004;dust.rotation.y+=.0003;earth.rotation.y+=.0015;
+  // Animate satellites (slow)
+  sats.forEach(s=>{
+    s.ph+=s.spd;
+    s.mesh.position.set(
+      EP.x+Math.cos(s.ph)*s.r,
+      EP.y+Math.sin(s.ph*s.inc)*s.r*.28,
+      EP.z+Math.sin(s.ph)*s.r
+    );
+    s.mesh.rotation.y=s.ph+Math.PI*.5;
+    if(s.human) s.mesh.rotation.z=s.inc*.4;
+  });
+  camera.position.x+=(pointer.x*10-camera.position.x)*.05;
+  camera.position.y+=(-pointer.y*8-camera.position.y)*.05;
+  camera.lookAt(0,0,0);renderer.render(scene,camera);requestAnimationFrame(loop);
+})();
+
 window.addEventListener("resize",()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
 
+// ── GSAP ──
 gsap.from(".hero-meta span",{opacity:0,y:18,stagger:.1,duration:.6,ease:"power2.out"});
 gsap.from(".hero h1",{opacity:0,y:24,duration:.7,ease:"power2.out"});
 gsap.from(".hero h1 .name-highlight",{opacity:0,scale:.9,duration:.8,ease:"power3.out"});
@@ -425,370 +582,381 @@ document.querySelectorAll(".nav-links a").forEach(link=>{
 });
 </script>
 
-<!-- ======= CHARACTER ANIMATION ENGINE ======= -->
+<!-- ===== CHARACTER ENGINE ===== -->
 <script>
 (function(){
-  // ---- DOM refs ----
-  const wrap   = document.getElementById('char-wrap');
-  const svg    = document.getElementById('char-svg');
-  const bubble = document.getElementById('char-bubble');
-  const pl     = document.getElementById('c-pl');
-  const pr     = document.getElementById('c-pr');
-  const mouth  = document.getElementById('c-mouth');
-  const blL    = document.getElementById('c-blush-l');
-  const blR    = document.getElementById('c-blush-r');
-  const bwL    = document.getElementById('c-bl');
-  const bwR    = document.getElementById('c-br');
-  const sw1    = document.getElementById('c-sw1');
-  const sw2    = document.getElementById('c-sw2');
-  const st1    = document.getElementById('c-st1');
-  const st2    = document.getElementById('c-st2');
-  const st3    = document.getElementById('c-st3');
-  const h1     = document.getElementById('c-heart1');
-  const h2     = document.getElementById('c-heart2');
-  const zzz1   = document.getElementById('c-zzz1');
-  const zzz2   = document.getElementById('c-zzz2');
-  const bulb   = document.getElementById('c-bulb');
-  const glasses= document.getElementById('c-glasses');
-  const armL   = document.getElementById('c-arm-l');
-  const armR   = document.getElementById('c-arm-r');
-  const legL   = document.getElementById('c-leg-l');
-  const legR   = document.getElementById('c-leg-r');
-  const shadow = document.getElementById('c-shadow');
+  const wrap    = document.getElementById('char-wrap');
+  const svg     = document.getElementById('char-svg');
+  const bubble  = document.getElementById('char-bubble');
+  const thought = document.getElementById('char-thought');
+  const scrGlow = document.getElementById('screen-glow');
+  const pl      = document.getElementById('c-pl');
+  const pr      = document.getElementById('c-pr');
+  const mouth   = document.getElementById('c-mouth');
+  const blL     = document.getElementById('c-blush-l');
+  const blR     = document.getElementById('c-blush-r');
+  const bwL     = document.getElementById('c-bl');
+  const bwR     = document.getElementById('c-br');
+  const sw1     = document.getElementById('c-sw1');
+  const sw2     = document.getElementById('c-sw2');
+  const st1     = document.getElementById('c-st1');
+  const st2     = document.getElementById('c-st2');
+  const st3     = document.getElementById('c-st3');
+  const h1      = document.getElementById('c-heart1');
+  const h2      = document.getElementById('c-heart2');
+  const zzz1    = document.getElementById('c-zzz1');
+  const zzz2    = document.getElementById('c-zzz2');
+  const bulb    = document.getElementById('c-bulb');
+  const code1   = document.getElementById('c-code1');
+  const code2   = document.getElementById('c-code2');
+  const think1  = document.getElementById('c-think1');
+  const think2  = document.getElementById('c-think2');
+  const think3  = document.getElementById('c-think3');
+  const glasses = document.getElementById('c-glasses');
+  const armL    = document.getElementById('c-arm-l');
+  const armR    = document.getElementById('c-arm-r');
+  const legL    = document.getElementById('c-leg-l');
+  const legR    = document.getElementById('c-leg-r');
+  const shadow  = document.getElementById('c-shadow');
+  const laptop  = document.getElementById('c-laptop');
+  const lapCur  = document.getElementById('lap-cursor');
 
-  // ---- State ----
-  let posX = window.innerWidth - 110;
-  let velX = 0;
-  let dir  = -1; // -1 = left, 1 = right
+  // ── State ──
+  let posX        = window.innerWidth - 120;
+  let velX        = 0;
+  let dir         = -1;
   let currentMood = '';
   let walkPhase   = 0;
-  let bubbleTimer = null;
-  let swAnim = null, starAnim = null, heartAnim = null, zzzAnim = null, zzzT = 0;
-  let idleCounter = 0;
-  let isWalking   = true;
-  let isStopped   = false;
-  let stopTimer   = null;
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let bounceY = 0;
-  let bounceT = 0;
-  const FLOOR = window.innerHeight - 155;
-  const CHAR_W = 90;
-  const SPEED_BASE = 1.4;
-  const SPEED_MAX  = 3.2;
+  let bubTimer    = null, thoughtTimer = null;
+  let swAnim=null, starAnim=null, heartAnim=null, codeAnim=null, thinkAnim=null, lapAnim=null;
+  let idleCounter = 0, idleT = 0;
+  let isStopped   = false, stopTimer=null;
+  let isHovered   = false;  // mouse is ON character
+  let isCoding    = false;  // coding mode
+  let mouseX      = window.innerWidth/2;
+  let bounceY     = 0;
+  const FLOOR   = window.innerHeight - 158;
+  const CHAR_W  = 90;
+  const SPD_MIN = 1.2, SPD_MAX = 3.5;
 
-  // ---- Mood configs ----
+  // ── Mood configs ──
   const MOODS = {
-    about: {
-      mouth:'M37 47 Q45 55 53 47', bl:.8, sw:0, st:1, hr:0, zzz:0, bulb_:0, glass_:0,
-      bL:'M27 20 Q35 15 43 20', bR:'M47 20 Q55 15 63 20',
-      msgs:['Mera naam! 🥳','Yahaan hoon main! ✨','Hello visitor! 👋','Khushi ho gayi! 😄'],
-      armL:'rotate(-35,28,68)', armR:'rotate(35,62,68)', walkFast:true
+    about:{
+      mouth:'M37 47 Q45 55 53 47',bl:.8,sw:0,st:1,hr:0,bulb_:0,glass_:0,
+      bL:'M27 20 Q35 15 43 20',bR:'M47 20 Q55 15 63 20',
+      msgs:['Mera naam! 🥳','Hello visitor! 👋','Khushi ho gayi! 😄','Welcome! ✨'],aL:-32,aR:32
     },
-    experience: {
-      mouth:'M37 47 Q45 52 53 47', bl:.3, sw:0, st:0, hr:0, zzz:0, bulb_:0, glass_:0,
-      bL:'M27 22 Q35 18 43 22', bR:'M47 22 Q55 18 63 22',
-      msgs:['3.2 saal ka experience! 💪','Hard work pays off! 🚀','Virtusa mein kaam kiya! 👔'],
-      armL:'rotate(-15,28,68)', armR:'rotate(15,62,68)', walkFast:false
+    experience:{
+      mouth:'M37 47 Q45 52 53 47',bl:.3,sw:0,st:0,hr:0,bulb_:0,glass_:0,
+      bL:'M27 22 Q35 18 43 22',bR:'M47 22 Q55 18 63 22',
+      msgs:['3.2 saal ka experience! 💪','Virtusa mein kaam! 👔','Hard work! 🚀'],aL:-12,aR:12
     },
-    projects: {
-      mouth:'M37 47 Q45 52 53 47', bl:.2, sw:0, st:0, hr:0, zzz:0, bulb_:1, glass_:0,
-      bL:'M27 21 Q35 17 43 21', bR:'M47 21 Q55 17 63 21',
-      msgs:['Idea aa gaya! 💡','Code likhna hai abhi! ⚡','Billing app banaya maine! 🔧'],
-      armL:'rotate(-20,28,68)', armR:'rotate(20,62,68)', walkFast:false
+    projects:{
+      mouth:'M37 47 Q45 52 53 47',bl:.2,sw:0,st:0,hr:0,bulb_:1,glass_:0,
+      bL:'M27 21 Q35 17 43 21',bR:'M47 21 Q55 17 63 21',
+      msgs:['Idea aa gaya! 💡','Code karta hoon! ⚡','Spot Billing! 🔧'],aL:-18,aR:18
     },
-    skills: {
-      mouth:'M40 51 Q45 47 50 51', bl:0, sw:.9, st:0, hr:0, zzz:0, bulb_:0, glass_:0,
-      bL:'M27 25 Q35 21 43 24', bR:'M47 24 Q55 21 63 25',
-      msgs:['Itni skills?! 😰','Sab yaad karna hoga! 😵','Tension... bahut kuch hai! 😓','AWS + Docker + Java... 🫠'],
-      armL:'rotate(15,28,68)', armR:'rotate(-15,62,68)', walkFast:false
+    skills:{
+      mouth:'M40 51 Q45 47 50 51',bl:0,sw:.9,st:0,hr:0,bulb_:0,glass_:0,
+      bL:'M27 25 Q35 21 43 24',bR:'M47 24 Q55 21 63 25',
+      msgs:['Itni skills?! 😰','Sab yaad karna hoga! 😵','Bahut tension! 😓'],aL:14,aR:-14
     },
-    education: {
-      mouth:'M37 47 Q45 50 53 47', bl:.15, sw:0, st:0, hr:0, zzz:0, bulb_:0, glass_:1,
-      bL:'M27 22 Q35 18 43 22', bR:'M47 22 Q55 18 63 22',
-      msgs:['Padhai kari thi! 🎓','MCA complete! 📚','Knowledge is power! 🧠'],
-      armL:'rotate(0,28,68)', armR:'rotate(0,62,68)', walkFast:false
+    education:{
+      mouth:'M37 47 Q45 50 53 47',bl:.15,sw:0,st:0,hr:0,bulb_:0,glass_:1,
+      bL:'M27 22 Q35 18 43 22',bR:'M47 22 Q55 18 63 22',
+      msgs:['MCA complete! 🎓','Padhai kari! 📚','Knowledge! 🧠'],aL:0,aR:0
     },
-    contact: {
-      mouth:'M36 46 Q45 54 54 46', bl:.9, sw:0, st:0, hr:1, zzz:0, bulb_:0, glass_:0,
-      bL:'M27 19 Q35 14 43 19', bR:'M47 19 Q55 14 63 19',
-      msgs:['Contact karo mujhe! 🙏','Hire karo please! 💌','Email ya LinkedIn! 📧','Available hoon main! 😊'],
-      armL:'rotate(-40,28,68)', armR:'rotate(40,62,68)', walkFast:true
+    contact:{
+      mouth:'M36 46 Q45 54 54 46',bl:.9,sw:0,st:0,hr:1,bulb_:0,glass_:0,
+      bL:'M27 19 Q35 14 43 19',bR:'M47 19 Q55 14 63 19',
+      msgs:['Contact karo! 🙏','Hire karo please! 💌','Available hoon! 😊'],aL:-38,aR:38
     }
   };
 
-  function clearAllAnimLoops(){
-    if(swAnim)  { clearInterval(swAnim);   swAnim   = null; }
-    if(starAnim){ clearInterval(starAnim); starAnim = null; }
-    if(heartAnim){clearInterval(heartAnim);heartAnim= null; }
-    if(zzzAnim) { clearInterval(zzzAnim);  zzzAnim  = null; }
+  function clearLoops(){
+    [swAnim,starAnim,heartAnim,codeAnim,thinkAnim,lapAnim].forEach(a=>{if(a)clearInterval(a);});
+    swAnim=starAnim=heartAnim=codeAnim=thinkAnim=lapAnim=null;
   }
 
-  function showBubble(text){
-    if(!text) return;
-    bubble.textContent = text;
-    bubble.style.opacity = '1';
-    if(bubbleTimer) clearTimeout(bubbleTimer);
-    bubbleTimer = setTimeout(()=>{ bubble.style.opacity = '0'; }, 3400);
+  function showBubble(txt){
+    if(!txt)return;
+    thought.style.opacity='0';
+    bubble.textContent=txt;
+    bubble.style.opacity='1';
+    if(bubTimer)clearTimeout(bubTimer);
+    bubTimer=setTimeout(()=>bubble.style.opacity='0',3500);
   }
 
-  function pickMsg(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+  function showThought(txt){
+    if(!txt)return;
+    bubble.style.opacity='0';
+    thought.textContent=txt;
+    thought.style.opacity='1';
+    if(thoughtTimer)clearTimeout(thoughtTimer);
+    thoughtTimer=setTimeout(()=>thought.style.opacity='0',4000);
+  }
 
-  function hideAllFX(){
-    [blL,blR,sw1,sw2,st1,st2,st3,h1,h2,zzz1,zzz2,bulb,glasses].forEach(el=>{if(el) el.style.opacity='0';});
-    armL.style.transform='';armR.style.transform='';
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+  function hideFX(){
+    [blL,blR,sw1,sw2,st1,st2,st3,h1,h2,zzz1,zzz2,bulb,glasses,code1,code2,think1,think2,think3]
+      .forEach(el=>{if(el)el.style.opacity='0';});
+    laptop.style.opacity='0';
+    scrGlow.style.opacity='0';
+  }
+
+  // ── CODING MODE: mouse hover on character ──
+  function enterCodingMode(){
+    if(isCoding)return;
+    isCoding=true;
+    isHovered=true;
+    isStopped=true;
+    clearLoops();
+    hideFX();
+    stopWalk();
+
+    // Sit down: shrink legs, lean forward
+    legL.style.transform='rotate(80deg)';legL.style.transformOrigin='36px 103px';
+    legR.style.transform='rotate(-80deg)';legR.style.transformOrigin='53px 103px';
+    // Arms forward (typing position)
+    armL.style.transform='rotate(35deg)';armL.style.transformOrigin='28px 68px';
+    armR.style.transform='rotate(-35deg)';armR.style.transformOrigin='62px 68px';
+    // Face: focused, slight smile
+    mouth.setAttribute('d','M39 48 Q45 51 51 48');
+    bwL.setAttribute('d','M27 21 Q35 17 43 21');
+    bwR.setAttribute('d','M47 21 Q55 17 63 21');
+    blL.style.opacity='0.15'; blR.style.opacity='0.15';
+    // Show laptop + code symbols
+    laptop.style.opacity='1';
+    code1.style.opacity='1'; code2.style.opacity='1';
+    scrGlow.style.opacity='0.9';
+
+    // Animate screen glow + code symbols + typing
+    let ct=0;
+    codeAnim=setInterval(()=>{
+      ct+=0.12;
+      code1.setAttribute('x',String(66+Math.sin(ct)*3));
+      code1.setAttribute('y',String(14-Math.abs(Math.sin(ct*1.3))*6));
+      code2.setAttribute('x',String(2+Math.sin(ct+1)*2));
+      code2.setAttribute('y',String(14-Math.abs(Math.sin(ct*1.1+1))*5));
+    },60);
+
+    // Laptop cursor blink
+    lapAnim=setInterval(()=>{
+      lapCur.style.opacity=lapCur.style.opacity==='0'?'0.9':'0';
+    },600);
+
+    // Typing sounds (bubble messages while coding)
+    const codeMsgs=[
+      'System.out.println("Hello!") 💻',
+      '@SpringBootApplication 🌱',
+      'git commit -m "fix bug" 🐛',
+      'SELECT * FROM users; 🗄️',
+      'docker run abhishek 🐳',
+      'npm install... ⏳',
+      'BUILD SUCCESS ✅',
+      'Exception caught! 😅',
+    ];
+    showBubble('Coding mode on! 💻');
+    let mi=0;
+    const msgTimer=setInterval(()=>{
+      if(!isCoding){clearInterval(msgTimer);return;}
+      showBubble(codeMsgs[mi%codeMsgs.length]);mi++;
+    },3800);
+  }
+
+  function exitCodingMode(){
+    if(!isCoding)return;
+    isCoding=false;
+    isHovered=false;
+    clearLoops();
+    hideFX();
+    laptop.style.opacity='0';
+    // Restore legs
+    legL.style.transform='';legR.style.transform='';
+    legL.style.transformOrigin='';legR.style.transformOrigin='';
+    // Jump up!
+    let jt=0;
+    const jLoop=setInterval(()=>{
+      jt+=0.2;
+      const jy=-Math.abs(Math.sin(jt))*32;
+      wrap.style.transform=`translate(${posX}px,${FLOOR+jy}px)`;
+      if(jt>Math.PI){clearInterval(jLoop); isStopped=false;}
+    },16);
+    // Thinking face after jump
+    setTimeout(()=>{
+      mouth.setAttribute('d','M38 48 Q45 46 52 48');// neutral-thinking mouth
+      bwL.setAttribute('d','M27 22 Q35 18 43 22');
+      bwR.setAttribute('d','M47 20 Q55 16 63 20');// one brow up = thinking
+      blL.style.opacity='0'; blR.style.opacity='0';
+      think1.style.opacity='0.7'; think2.style.opacity='0.8'; think3.style.opacity='0.9';
+      const thinkMsgs=[
+        'Kya sochun... 🤔','Next feature? 🧠',
+        'Bug kahan hai? 🔍','Algorithm... 💭',
+        'Chai peeni chahiye! ☕','Deploy karna hai! 🚀'
+      ];
+      showThought(pick(thinkMsgs));
+      // Float thinking dots
+      let tt=0;
+      thinkAnim=setInterval(()=>{
+        tt+=0.1;
+        think1.setAttribute('r',String(3+Math.sin(tt)*1));
+        think2.setAttribute('r',String(4+Math.sin(tt+0.7)*1.2));
+        think3.setAttribute('r',String(5+Math.sin(tt+1.4)*1.5));
+      },60);
+      // After 3s return to mood
+      setTimeout(()=>{
+        if(!isCoding){
+          clearLoops();
+          hideFX();
+          currentMood='';
+          detectSection();
+        }
+      },3500);
+    },800);
   }
 
   function setMood(mood){
-    if(mood === currentMood) return;
-    currentMood = mood;
-    clearAllAnimLoops();
-    hideAllFX();
-    const m = MOODS[mood];
-    if(!m) return;
-
-    // Face
-    mouth.setAttribute('d', m.mouth);
-    blL.style.opacity  = m.bl;
-    blR.style.opacity  = m.bl;
-    bwL.setAttribute('d', m.bL);
-    bwR.setAttribute('d', m.bR);
-
-    // Arms
-    armL.style.transform = m.armL || '';
-    armR.style.transform = m.armR || '';
-
-    // Special FX
-    if(m.st)    { st1.style.opacity=1; st2.style.opacity=1; st3.style.opacity=1; }
-    if(m.hr)    { h1.style.opacity=1;  h2.style.opacity=1; }
-    if(m.bulb_) { bulb.style.opacity=1; }
-    if(m.glass_){ glasses.style.opacity=1; }
-
-    // Animations
-    if(m.sw > 0){
-      let t=0;
-      swAnim = setInterval(()=>{
-        t+=0.12;
-        sw1.style.opacity = String(m.sw * (0.6 + 0.4*Math.abs(Math.sin(t))));
-        sw2.style.opacity = String(m.sw * (0.5 + 0.5*Math.abs(Math.sin(t+1))));
-        sw1.setAttribute('cy', 20 + Math.sin(t)*4);
-        sw2.setAttribute('cy', 30 + Math.sin(t+1.5)*3);
-      }, 60);
+    if(mood===currentMood||isCoding)return;
+    currentMood=mood;
+    clearLoops();
+    hideFX();
+    const m=MOODS[mood];if(!m)return;
+    mouth.setAttribute('d',m.mouth);
+    blL.style.opacity=m.bl; blR.style.opacity=m.bl;
+    bwL.setAttribute('d',m.bL); bwR.setAttribute('d',m.bR);
+    armL.style.transform=m.aL?`rotate(${m.aL}deg)`:'';armL.style.transformOrigin='28px 68px';
+    armR.style.transform=m.aR?`rotate(${m.aR}deg)`:'';armR.style.transformOrigin='62px 68px';
+    if(m.st){st1.style.opacity=1;st2.style.opacity=1;st3.style.opacity=1;}
+    if(m.hr){h1.style.opacity=1;h2.style.opacity=1;}
+    if(m.bulb_){bulb.style.opacity=1;}
+    if(m.glass_){glasses.style.opacity=1;}
+    if(m.sw>0){
+      let t=0;swAnim=setInterval(()=>{t+=.13;sw1.style.opacity=String(m.sw*(.55+.45*Math.abs(Math.sin(t))));sw2.style.opacity=String(m.sw*(.45+.55*Math.abs(Math.sin(t+1))));sw1.setAttribute('cy',20+Math.sin(t)*4);sw2.setAttribute('cy',30+Math.sin(t+1.5)*3);},60);
     }
-    if(m.st){
-      let t=0;
-      starAnim = setInterval(()=>{
-        t+=0.18;
-        st1.setAttribute('y', 18 - Math.abs(Math.sin(t))*10);
-        st2.setAttribute('y', 14 - Math.abs(Math.sin(t+1))*8);
-        st3.setAttribute('y', 44 - Math.abs(Math.sin(t+2))*7);
-      }, 55);
-    }
-    if(m.hr){
-      let t=0;
-      heartAnim = setInterval(()=>{
-        t+=0.15;
-        h1.setAttribute('y', 16 - Math.abs(Math.sin(t))*10);
-        h2.setAttribute('y', 12 - Math.abs(Math.sin(t+0.8))*8);
-      }, 55);
-    }
-
-    if(m.msgs && m.msgs.length) showBubble(pickMsg(m.msgs));
-    isWalking = true;
-    isStopped = false;
+    if(m.st){let t=0;starAnim=setInterval(()=>{t+=.18;st1.setAttribute('y',18-Math.abs(Math.sin(t))*11);st2.setAttribute('y',14-Math.abs(Math.sin(t+1))*9);st3.setAttribute('y',44-Math.abs(Math.sin(t+2))*7);},55);}
+    if(m.hr){let t=0;heartAnim=setInterval(()=>{t+=.16;h1.setAttribute('y',16-Math.abs(Math.sin(t))*11);h2.setAttribute('y',12-Math.abs(Math.sin(t+.9))*9);},55);}
+    if(m.msgs.length)showBubble(pick(m.msgs));
+    isStopped=false;
   }
 
-  // ---- Walking animation (legs/arms) ----
   function updateWalk(speed){
-    walkPhase += speed * 0.09;
-    const lp = Math.sin(walkPhase) * 18;
-    const rp = -lp;
-    const bodyBob = Math.abs(Math.sin(walkPhase)) * 3;
-    legL.style.transform = `rotate(${lp}deg)`;
-    legL.style.transformOrigin = '36px 103px';
-    legR.style.transform = `rotate(${rp}deg)`;
-    legR.style.transformOrigin = '53px 103px';
-    // Arms swing opposite to legs while walking
-    const moodCfg = MOODS[currentMood];
-    const moodArmL = moodCfg ? moodCfg.armL : '';
-    const moodArmR = moodCfg ? moodCfg.armR : '';
-    // Only swing if mood arms not dramatically raised
-    if(!moodArmL || moodArmL==='rotate(0,28,68)' || moodArmL==='rotate(-15,28,68)' || moodArmL==='rotate(-20,28,68)'){
-      armL.style.transform = `rotate(${-lp * 0.6}deg)`;
-      armL.style.transformOrigin = '28px 68px';
-      armR.style.transform = `rotate(${lp * 0.6}deg)`;
-      armR.style.transformOrigin = '62px 68px';
+    walkPhase+=speed*.092;
+    const la=Math.sin(walkPhase)*20,ra=-la;
+    legL.style.transform=`rotate(${la}deg)`;legL.style.transformOrigin='36px 103px';
+    legR.style.transform=`rotate(${ra}deg)`;legR.style.transformOrigin='53px 103px';
+    bounceY=Math.abs(Math.sin(walkPhase))*3.5;
+    shadow.setAttribute('rx',String(22-bounceY*.5));
+    const m=MOODS[currentMood];
+    if(m&&Math.abs(m.aL||0)<20){
+      armL.style.transform=`rotate(${-la*.55}deg)`;armL.style.transformOrigin='28px 68px';
+      armR.style.transform=`rotate(${la*.55}deg)`;armR.style.transformOrigin='62px 68px';
     }
-    bounceY = bodyBob;
-    // Shadow pulse
-    shadow.setAttribute('rx', String(22 - bodyBob * 0.5));
-    shadow.setAttribute('ry', String(5 - bodyBob * 0.15));
   }
 
   function stopWalk(){
-    legL.style.transform = '';
-    legR.style.transform = '';
-    bounceY = 0;
-    shadow.setAttribute('rx','22');
-    shadow.setAttribute('ry','5');
+    legL.style.transform='';legR.style.transform='';
+    legL.style.transformOrigin='';legR.style.transformOrigin='';
+    bounceY=0;shadow.setAttribute('rx','22');
+    const m=MOODS[currentMood];
+    if(m&&!isCoding){
+      armL.style.transform=m.aL?`rotate(${m.aL}deg)`:'';armL.style.transformOrigin='28px 68px';
+      armR.style.transform=m.aR?`rotate(${m.aR}deg)`:'';armR.style.transformOrigin='62px 68px';
+    }
   }
 
-  // ---- Idle bobbing ----
-  let idleT = 0;
+  function applyDir(){
+    svg.style.transform=dir>0?'scaleX(-1)':'scaleX(1)';
+    // Bubble always readable — counter-flip
+    const bShift=dir>0?'scaleX(-1) translateX(50%)':'translateX(-50%)';
+    bubble.style.transform=bShift;
+    thought.style.transform=bShift;
+    scrGlow.style.transform=bShift;
+  }
+
   function idleBob(){
-    idleT += 0.04;
-    const bob = Math.sin(idleT) * 2.5;
-    wrap.style.transform = `translate(${posX}px, ${FLOOR + bob}px)`;
-    // Idle zzz after long stop
+    idleT+=.038;
+    const bob=Math.sin(idleT)*2.8;
+    wrap.style.transform=`translate(${posX}px,${FLOOR+bob}px)`;
     idleCounter++;
-    if(idleCounter > 180 && !swAnim && !starAnim){
-      zzz1.style.opacity = String(0.5 + 0.5*Math.abs(Math.sin(idleT*0.5)));
-      zzz2.style.opacity = String(0.4 + 0.4*Math.abs(Math.sin(idleT*0.5+1)));
+    if(idleCounter>220&&!isCoding){
+      zzz1.style.opacity=String(.5+.5*Math.abs(Math.sin(idleT*.4)));
+      zzz2.style.opacity=String(.4+.4*Math.abs(Math.sin(idleT*.4+1)));
     }
   }
 
-  // ---- Flip character based on direction ----
-  function applyFlip(){
-    svg.style.transform = dir > 0 ? 'scaleX(-1)' : 'scaleX(1)';
-    // Flip bubble text back
-    bubble.style.transform = dir > 0 ? 'scaleX(-1) translateX(50%)' : 'translateX(-50%)';
-  }
-
-  // ---- Main animation loop ----
-  let lastT = 0;
+  // ── Main loop ──
+  let lastT=0;
   function loop(ts){
-    const dt = Math.min(ts - lastT, 50);
-    lastT = ts;
-
-    if(isStopped){
-      idleBob();
-      requestAnimationFrame(loop);
-      return;
-    }
-
-    // Walk toward mouse X lazily
-    const targetX = mouseX - 45;
-    const diff = targetX - posX;
-    const absDiff = Math.abs(diff);
-
-    if(absDiff < 8){
-      // Reached target — stop and idle
-      if(!isStopped){
-        isStopped = true;
-        isWalking = false;
-        stopWalk();
-        idleCounter = 0;
-        // Occasionally do a little jump/wave
-        if(stopTimer) clearTimeout(stopTimer);
-        stopTimer = setTimeout(()=>{ isStopped=false; }, 2800 + Math.random()*3000);
-      }
+    const dt=Math.min(ts-lastT,50);lastT=ts;
+    if(isCoding||isStopped){idleBob();requestAnimationFrame(loop);return;}
+    const targetX=mouseX-46,diff=targetX-posX,absDiff=Math.abs(diff);
+    if(absDiff<10){
+      if(!isStopped){isStopped=true;stopWalk();idleCounter=0;zzz1.style.opacity='0';zzz2.style.opacity='0';if(stopTimer)clearTimeout(stopTimer);stopTimer=setTimeout(()=>{isStopped=false;},2500+Math.random()*3000);}
     } else {
-      isStopped = false;
-      zzz1.style.opacity='0'; zzz2.style.opacity='0'; idleCounter=0;
-      dir = diff > 0 ? 1 : -1;
-      applyFlip();
-
-      // Ease velocity
-      const speed = Math.min(SPEED_MAX, SPEED_BASE + absDiff * 0.015);
-      velX += (dir * speed - velX) * 0.12;
-      posX += velX;
-
-      // Clamp to screen
-      posX = Math.max(0, Math.min(window.innerWidth - CHAR_W, posX));
-
+      isStopped=false;idleCounter=0;zzz1.style.opacity='0';zzz2.style.opacity='0';
+      dir=diff>0?1:-1;applyDir();
+      const spd=Math.min(SPD_MAX,SPD_MIN+absDiff*.018);
+      velX+=(dir*spd-velX)*.13;posX+=velX;
+      posX=Math.max(0,Math.min(window.innerWidth-CHAR_W,posX));
       updateWalk(Math.abs(velX));
-      wrap.style.transform = `translate(${posX}px, ${FLOOR - bounceY}px)`;
+      wrap.style.transform=`translate(${posX}px,${FLOOR-bounceY}px)`;
     }
-
     requestAnimationFrame(loop);
   }
 
-  // ---- Mouse tracking ----
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    // Pupil follow
-    const r   = svg.getBoundingClientRect();
-    const cx  = r.left + r.width  * 0.5;
-    const cy  = r.top  + r.height * 0.28;
-    const dx  = e.clientX - cx;
-    const dy  = e.clientY - cy;
-    const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-    const mx  = (dx/dist) * Math.min(2.8, dist/55);
-    const my  = (dy/dist) * Math.min(2.8, dist/55);
-    // Flip-aware
-    if(dir > 0){ pl.setAttribute('cx', String(35 - mx)); pr.setAttribute('cx', String(55 - mx)); }
-    else        { pl.setAttribute('cx', String(35 + mx)); pr.setAttribute('cx', String(55 + mx)); }
-    pl.setAttribute('cy', String(35 + my));
-    pr.setAttribute('cy', String(35 + my));
+  // ── Hover detect (mouse on character = coding) ──
+  svg.addEventListener('mouseenter',()=>{
+    enterCodingMode();
+  });
+  svg.addEventListener('mouseleave',()=>{
+    exitCodingMode();
   });
 
-  // ---- Scroll detection ----
-  const sections = ['about','experience','projects','skills','education','contact'];
+  // ── Mouse → pupils ──
+  document.addEventListener('mousemove',e=>{
+    mouseX=e.clientX;
+    if(isCoding)return; // don't track pupils in coding mode (looking at screen)
+    const r=svg.getBoundingClientRect();
+    const cx=r.left+r.width*.5,cy=r.top+r.height*.27;
+    const dx=e.clientX-cx,dy=e.clientY-cy;
+    const dist=Math.sqrt(dx*dx+dy*dy)||1;
+    let mx=(dx/dist)*Math.min(2.8,dist/55);
+    const my=(dy/dist)*Math.min(2.8,dist/55);
+    if(dir>0)mx=-mx;
+    pl.setAttribute('cx',String(35+mx));pl.setAttribute('cy',String(35+my));
+    pr.setAttribute('cx',String(55+mx));pr.setAttribute('cy',String(35+my));
+  });
+
+  // ── Scroll → mood ──
+  const secIds=['about','experience','projects','skills','education','contact'];
   function detectSection(){
-    let found = 'about';
-    for(const id of sections){
-      const el = document.getElementById(id);
-      if(!el) continue;
-      const r = el.getBoundingClientRect();
-      if(r.top < window.innerHeight * 0.6 && r.bottom > 60) found = id;
-    }
-    if(found !== currentMood) setMood(found);
+    if(isCoding)return;
+    let found='about';
+    for(const id of secIds){const el=document.getElementById(id);if(!el)continue;const r=el.getBoundingClientRect();if(r.top<window.innerHeight*.62&&r.bottom>80)found=id;}
+    if(found!==currentMood)setMood(found);
   }
-  window.addEventListener('scroll', detectSection, { passive:true });
+  window.addEventListener('scroll',detectSection,{passive:true});
 
-  // ---- Click ----
-  const clickMsgs = [
-    'Hire karo mujhe! 🙏','Main ready hoon! 💼','Click karoge to naachwaan! 🕺',
-    'Java expert hoon! ☕','GitHub check karo! 🐙','AWS bhi aata hai! ☁️',
-    'Kuch kaam hai? 👀','Portfolio dekha? 😊'
-  ];
-  svg.addEventListener('click', () => {
-    showBubble(pickMsg(clickMsgs));
-    // Little jump animation
-    const origFloor = FLOOR;
-    let jt = 0;
-    const jAnim = setInterval(()=>{
-      jt += 0.25;
-      const jy = Math.abs(Math.sin(jt)) * -28;
-      wrap.style.transform = `translate(${posX}px, ${origFloor + jy}px)`;
-      if(jt > Math.PI){ clearInterval(jAnim); }
-    }, 16);
+  // ── Click (only when not hovered) ──
+  const clickMsgs=['Hire karo mujhe! 🙏','Main ready hoon! 💼','Java expert! ☕','GitHub dekho! 🐙','AWS bhi aata hai! ☁️','Kuch kaam hai? 👀','Portfolio pasand aaya? 😊'];
+  svg.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(isCoding)return; // hover handles coding
+    showBubble(pick(clickMsgs));
+    let jt=0;const jLoop=setInterval(()=>{jt+=.22;wrap.style.transform=`translate(${posX}px,${FLOOR-Math.abs(Math.sin(jt))*26}px)`;if(jt>Math.PI)clearInterval(jLoop);},16);
   });
 
-  // ---- Double-click spin ----
-  svg.addEventListener('dblclick', () => {
-    let angle=0;
-    const spinAnim = setInterval(()=>{
-      angle += 18;
-      svg.style.transform = `rotate(${angle}deg)`;
-      if(angle >= 360){ svg.style.transform = dir>0?'scaleX(-1)':'scaleX(1)'; clearInterval(spinAnim); }
-    }, 16);
-  });
-
-  // ---- Init ----
-  wrap.style.position = 'fixed';
-  wrap.style.bottom   = 'auto';
-  wrap.style.left     = '0';
-  wrap.style.top      = '0';
-  posX = window.innerWidth - 110;
-  wrap.style.transform = `translate(${posX}px, ${FLOOR}px)`;
-  applyFlip();
-  setMood('about');
-
-  window.addEventListener('resize',()=>{
-    mouseX = window.innerWidth/2;
-  });
-
+  // ── Init ──
+  wrap.style.position='fixed';wrap.style.left='0';wrap.style.top='0';wrap.style.bottom='auto';
+  posX=window.innerWidth-120;
+  wrap.style.transform=`translate(${posX}px,${FLOOR}px)`;
+  applyDir();setMood('about');
+  setTimeout(()=>showBubble('Namaste! Hover karo mujhpe! 🖱️'),900);
+  setTimeout(detectSection,1200);
+  window.addEventListener('resize',()=>{mouseX=window.innerWidth/2;});
   requestAnimationFrame(loop);
-
-  // ---- Initial greeting ----
-  setTimeout(()=>{ showBubble('Namaste! Main chal raha hoon! 🚶'); }, 900);
-
 })();
 </script>
-<!-- ======= END CHARACTER ENGINE ======= -->
-
 </body>
 </html>
